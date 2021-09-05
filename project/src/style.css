@@ -1,0 +1,162 @@
+body {
+  font-family: sans-serif;
+}
+body {
+  background-color: #6c9bb2;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+h1 {
+  display: inline;
+  font-size: 37px;
+}
+
+h2 {
+  color: #667fa0;
+  font-size: 20px;
+}
+
+p {
+  color: #566270;
+}
+
+.sun {
+  color: #f4bc42;
+  font-size: 75px;
+}
+
+.sunSmall {
+  color: #f4bc42;
+  font-size: 35px;
+}
+.weatherapp {
+  width: 650px;
+  height: 450px;
+  margin: 50px auto;
+}
+.weatherapptopleft {
+  background-color: rgba(250, 250, 250, 0.7);
+  width: 400px;
+  height: 50px;
+  margin: 50px auto;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin: 0;
+}
+
+.weatherapptopright {
+  width: 200px;
+  position: relative;
+  float: right;
+  top: -38px;
+  right: 40px;
+}
+
+.form {
+  width: 110px;
+}
+
+.searchButton {
+  display: inline;
+  width: 75px;
+  height: 29px;
+  border: none;
+  background: #edb234;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 2px 4px;
+}
+
+.searchButton:hover {
+  background-color: #efcd83;
+}
+button {
+  float: right;
+  position: relative;
+  top: -29px;
+  left: 73px;
+  border: none;
+  background-color: #3a8df4;
+  width: 75px;
+  height: 29px;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 2px 4px;
+}
+
+button:hover {
+  background-color: #75acef;
+}
+.selected {
+  border-bottom: solid #132743 4px;
+}
+
+.weatherappbottom {
+  background-color: rgba(250, 250, 250, 0.7);
+  width: 700px;
+  height: 420px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 15px;
+}
+
+.left {
+  width: 300px;
+  float: left;
+  padding: 0px 0px 0px 50px;
+}
+
+.lefttop {
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.leftbottom {
+  padding: 10px;
+}
+
+right {
+  display: inline;
+  width: 400px;
+  height: 300px;
+  position: relative;
+}
+
+.cardDay {
+  background-color: rgba(19, 39, 67, 1);
+  color: whitesmoke;
+  height: 60px;
+  width: 350px;
+  margin: 10px;
+}
+
+.cardDay:hover {
+  background-color: rgba(19, 39, 67, 0.6);
+}
+
+h3 {
+  color: whitesmoke;
+  display: inline;
+  margin-right: 10px;
+}
+
+h4 {
+  color: whitesmoke;
+  display: inline;
+  margin-right: 10px;
+  font-weight: 200;
+  font-size: 20px;
+}
+
+.footer {
+  color: #132743;
+  text-align: center;
+}

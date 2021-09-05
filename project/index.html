@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week2</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/833d2741e3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="weatherapp">
+      <div style="width: 650px">
+        <div class="weatherapptopleft">
+          <div class="row" style="padding: 10px">
+            <div class="col-3">
+              <span class="selected">Jakarta</span>
+            </div>
+            <div class="col-3">Beijing</div>
+            <div class="col-3">Amsterdam</div>
+            <div class="col-3">Hanoi</div>
+          </div>
+        </div>
+        <div class="weatherapptopright">
+          <form id="city-form">
+            <input
+              type="text"
+              id="city-input"
+              placeholder="enter city"
+              class="form"
+            />
+            <input type="submit" value="search" class="searchButton" />
+          </form>
+          <button>current</button>
+        </div>
+      </div>
+
+      <div class="weatherappbottom">
+        <div class="left">
+          <h1 id="selected-city">Jakarta</h1>
+          <div class="lefttop">
+            <i class="far fa-sun sun"></i>
+            <br />
+            <h1 id="mainTemp">19</h1>
+            <h2
+              style="
+                display: inline;
+                font-size: 15px;
+                position: relative;
+                top: -17px;
+                left: 5px;
+              "
+            >
+              <a href="#" id="celcius">°C</a>/
+              <a href="#" id="farenheit">°F</a>
+            </h2>
+            <h2 id="date">Sunday 17:50</h2>
+          </div>
+          <div class="leftbottom">
+            <p>
+              Precipitation: 4%<br />
+              Humidity:82%<br />
+              Wind:10km/h
+            </p>
+          </div>
+        </div>
+        <div class="right">
+          <div class="card cardDay">
+            <div class="card-body">
+              <i class="far fa-sun sunSmall"></i>
+              <h3>33°C</h3>
+              <h4 id="day-two">Monday</h4>
+            </div>
+          </div>
+          <div class="card cardDay">
+            <div class="card-body">
+              <i class="far fa-sun sunSmall"></i>
+              <h3>31°C</h3>
+              <h4 id="day-three">Tuesday</h4>
+            </div>
+          </div>
+          <div class="card cardDay">
+            <div class="card-body">
+              <i class="far fa-sun sunSmall"></i>
+              <h3>33°C</h3>
+              <h4 id="day-four">Wednesday</h4>
+            </div>
+          </div>
+          <div class="card cardDay">
+            <div class="card-body">
+              <i class="far fa-sun sunSmall"></i>
+              <h3>33°C</h3>
+              <h4 id="day-five">Thursday</h4>
+            </div>
+          </div>
+          <div class="card cardDay">
+            <div class="card-body">
+              <i class="far fa-sun sunSmall"></i>
+              <h3>33°C</h3>
+              <h4 id="day-six">Friday</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="footer">Coded by: Aurel Reyna.</p>
+    <script src="src/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+</html>
