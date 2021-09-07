@@ -31,8 +31,8 @@ p {
   font-size: 35px;
 }
 .weatherapp {
-  width: 650px;
-  height: 450px;
+  width: 700px;
+  height: 500px;
   margin: 50px auto;
 }
 .weatherapptopleft {
@@ -99,7 +99,7 @@ button:hover {
 .weatherappbottom {
   background-color: rgba(250, 250, 250, 0.7);
   width: 700px;
-  height: 420px;
+  height: 450px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
@@ -110,6 +110,7 @@ button:hover {
   width: 300px;
   float: left;
   padding: 0px 0px 0px 50px;
+  margin: 25px 0px;
 }
 
 .lefttop {
@@ -127,7 +128,6 @@ right {
   display: inline;
   width: 400px;
   height: 300px;
-  position: relative;
 }
 
 .cardDay {
@@ -135,7 +135,7 @@ right {
   color: whitesmoke;
   height: 60px;
   width: 350px;
-  margin: 10px;
+  margin: 10px 0px;
 }
 
 .cardDay:hover {
