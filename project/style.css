@@ -1,7 +1,6 @@
 body {
   background-image: url("img/morning.jpeg");
   height: 100%;
-  opacity: 0.7;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -159,6 +158,6 @@ h4 {
 }
 
 .footer {
-  color: #132743;
+  color: white;
   text-align: center;
 }
