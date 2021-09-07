@@ -26,6 +26,20 @@ if (minute < 10) {
 //Daynightcycle bg
 date.innerHTML = days[today] + ", " + hour + ":" + time;
 
+function change_background(hour) {
+  if (hour >= 6 && hour < 12) {
+    document.body.className = "day";
+  } else if (hour >= 12 && hour < 18) {
+    document.body.className = " noon";
+  } else if (hour >= 18 && hour <= 24) {
+    document.body.className = "evening";
+  } else if (hour >= 0 && hour < 6) {
+    document.body.className = "night";
+  }
+}
+
+change_background(hour);
+
 //Forecast
 let dayTwo = document.querySelector("#day-two");
 dayTwo.innerHTML = days[(today + 1) % 7];
