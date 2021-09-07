@@ -13,6 +13,7 @@ let days = [
 let now = new Date();
 let today = now.getDay();
 let date = document.querySelector("#date");
+let hour = now.getHours();
 let minute = now.getMinutes();
 
 let time = minute;
@@ -22,8 +23,10 @@ if (minute < 10) {
   time = minute;
 }
 
+//Daynightcycle bg
+date.innerHTML = days[today] + ", " + hour + ":" + time;
+
 //Forecast
-date.innerHTML = days[today] + ", " + now.getHours() + ":" + time;
 let dayTwo = document.querySelector("#day-two");
 dayTwo.innerHTML = days[(today + 1) % 7];
 let dayThree = document.querySelector("#day-three");
