@@ -1,26 +1,72 @@
-//-------------Initialize-------------
-let days = [
-  //Array for storing dates
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursdays",
-  "Friday",
-  "Saturday",
-];
+//-------------Daynight Cycle Bg Change-------------
+function changeBackground(hour) {
+  if (hour >= 6 && hour < 12) {
+    document.body.setAttribute("class", "morning");
+  } else if (hour >= 12 && hour < 18) {
+    document.body.setAttribute("class", "noon");
+  } else if (hour >= 18 && hour <= 24) {
+    document.body.setAttribute("class", "evening");
+  } else if (hour >= 0 && hour < 6) {
+    document.body.setAttribute("class", "night");
+  }
+}
+
+//-------------Forecast cards-------------
+function forecast(today, days) {
+  let dayTwo = document.querySelector("#day-two");
+  dayTwo.innerHTML = days[(today + 1) % 7];
+  let dayThree = document.querySelector("#day-three");
+  dayThree.innerHTML = days[(today + 2) % 7];
+  let dayFour = document.querySelector("#day-four");
+  dayFour.innerHTML = days[(today + 3) % 7];
+  let dayFive = document.querySelector("#day-five");
+  dayFive.innerHTML = days[(today + 4) % 7];
+  let daySix = document.querySelector("#day-six");
+  daySix.innerHTML = days[(today + 5) % 7];
+}
+
+//-------------Change Time-------------
+function dateFunc(currentDate) {
+  let date = new Date(currentDate * 1000);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let day = date.getDay();
+
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  forecast(day, days);
+  changeBackground(hours);
+
+  return `Last Updated: ${days[day]} ${hours}:${minutes}`;
+}
+
+//-------------Change Weather Data-------------
 function logWeatherData(response) {
   //function for displaying weather data
   let selectedCity = document.querySelector("#selected-city");
   selectedCity.innerHTML = response.data.name;
 
-  let temp = document.querySelector("#mainTemp");
-  let mainTemp = Math.round(response.data.main.temp);
-  temp.innerHTML = mainTemp;
+  let tempEl = document.querySelector("#mainTemp");
+  celciusTemp = response.data.main.temp;
+  tempEl.innerHTML = Math.round(celciusTemp);
 
   let descEl = document.querySelector("#description");
-  let desc = response.data.weather[0].main;
-  descEl.innerHTML = desc;
+  descEl.innerHTML = response.data.weather[0].main;
 
   let iconEl = document.querySelector("#icon");
   let link = `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
@@ -33,38 +79,38 @@ function logWeatherData(response) {
 
   let windEl = document.querySelector("#wind");
   windEl.innerHTML = `Wind: ${response.data.wind.speed}`;
+
+  let dateEl = document.querySelector("#date");
+  dateEl.innerHTML = dateFunc(response.data.dt);
 }
 
-//-------------Current Time-------------
-let now = new Date();
-let today = now.getDay();
-let date = document.querySelector("#date");
-let hour = now.getHours();
-let minute = now.getMinutes();
+//-------------Change Temp Unit-------------
+let celciusTemp = null;
 
-let time = minute;
-if (minute < 10) {
-  time = "0" + minute;
-} else {
-  time = minute;
+function displayFaren(event) {
+  event.preventDefault();
+  let farenTemp = (celciusTemp * 9) / 5 + 32;
+  let farenEl = document.querySelector("#mainTemp");
+  farenEl.innerHTML = Math.round(farenTemp);
+
+  celLink.classList.remove("selected-temp");
+  farenLink.setAttribute("class", "selected-temp");
 }
 
-//-------------DaynightCycle Background-------------
-date.innerHTML = days[today] + ", " + hour + ":" + time;
+let farenLink = document.querySelector("#farenheit");
+farenLink.addEventListener("click", displayFaren);
 
-function change_background(hour) {
-  if (hour >= 6 && hour < 12) {
-    document.body.setAttribute("class", "morning");
-  } else if (hour >= 12 && hour < 18) {
-    document.body.setAttribute("class", "noon");
-  } else if (hour >= 18 && hour <= 24) {
-    document.body.setAttribute("class", "evening");
-  } else if (hour >= 0 && hour < 6) {
-    document.body.setAttribute("class", "night");
-  }
+function displayCelcius(event) {
+  event.preventDefault();
+  let celEl = document.querySelector("#mainTemp");
+  celEl.innerHTML = Math.round(celciusTemp);
+
+  farenLink.classList.remove("selected-temp");
+  celLink.setAttribute("class", "selected-temp");
 }
 
-change_background(hour);
+let celLink = document.querySelector("#celcius");
+celLink.addEventListener("click", displayCelcius);
 
 //-------------Search City-------------
 function search(city) {
@@ -96,15 +142,3 @@ function currentLocation(event) {
 
 let button = document.querySelector("button");
 button.addEventListener("click", currentLocation);
-
-//-------------Weather Forcast-------------
-let dayTwo = document.querySelector("#day-two");
-dayTwo.innerHTML = days[(today + 1) % 7];
-let dayThree = document.querySelector("#day-three");
-dayThree.innerHTML = days[(today + 2) % 7];
-let dayFour = document.querySelector("#day-four");
-dayFour.innerHTML = days[(today + 3) % 7];
-let dayFive = document.querySelector("#day-five");
-dayFive.innerHTML = days[(today + 4) % 7];
-let daySix = document.querySelector("#day-six");
-daySix.innerHTML = days[(today + 5) % 7];

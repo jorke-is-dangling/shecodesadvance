@@ -12,7 +12,7 @@ h1 {
 
 h2 {
   color: #667fa0;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 #selected-city {
@@ -196,6 +196,16 @@ h4 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.selected-temp {
+  color: #132743;
+  cursor: default;
+  text-decoration: none;
+}
+
+.selected-temp:hover {
+  color: #132743;
 }
 
 .night {
