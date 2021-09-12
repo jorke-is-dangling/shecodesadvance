@@ -11,6 +11,9 @@ let days = [
 ];
 function logWeatherData(response) {
   //function for displaying weather data
+  let selectedCity = document.querySelector("#selected-city");
+  selectedCity.innerHTML = response.data.name;
+
   let temp = document.querySelector("#mainTemp");
   let mainTemp = Math.round(response.data.main.temp);
   temp.innerHTML = mainTemp;
@@ -32,7 +35,7 @@ function logWeatherData(response) {
   windEl.innerHTML = `Wind: ${response.data.wind.speed}`;
 }
 
-//Current time
+//-------------Current Time-------------
 let now = new Date();
 let today = now.getDay();
 let date = document.querySelector("#date");
@@ -46,37 +49,33 @@ if (minute < 10) {
   time = minute;
 }
 
-//Daynightcycle bg
+//-------------DaynightCycle Background-------------
 date.innerHTML = days[today] + ", " + hour + ":" + time;
 
-//Search City
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Jakarta&appid=9a3b65ea12488fdd227f03eda47a0bf6&units=metric`;
-axios.get(apiUrl).then(logWeatherData);
+//-------------Search City-------------
+function search(city) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=9a3b65ea12488fdd227f03eda47a0bf6&units=metric`;
+  axios.get(apiUrl).then(logWeatherData);
+}
+search("Jakarta");
 
 function searchCity(event) {
   event.preventDefault();
   let input = document.querySelector("#city-input");
   let selectedCity = document.querySelector("#selected-city");
   selectedCity.innerHTML = input.value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=9a3b65ea12488fdd227f03eda47a0bf6&units=metric`;
-  axios.get(apiUrl).then(logWeatherData);
+  search(input.value);
 }
 
 let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", searchCity);
 
-//Current City Button
-function showPosData(response) {
-  let selectedCity = document.querySelector("#selected-city");
-  selectedCity.innerHTML = response.data.name;
-  logWeatherData(response);
-}
+//-------------Current City-------------
 function showPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let apiKey = "9a3b65ea12488fdd227f03eda47a0bf6";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showPosData);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9a3b65ea12488fdd227f03eda47a0bf6&units=metric`;
+  axios.get(apiUrl).then(logWeatherData);
 }
 
 function currentLocation(event) {
