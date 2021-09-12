@@ -173,3 +173,35 @@ h4 {
   color: white;
   text-align: center;
 }
+
+.morning {
+  background-image: url("img/morning.jpeg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.noon {
+  background-image: url("img/noon.jpeg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.evening {
+  background-image: url("img/evening.jpeg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.night {
+  background-image: url("img/night.jpeg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

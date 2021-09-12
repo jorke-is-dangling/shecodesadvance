@@ -52,6 +52,20 @@ if (minute < 10) {
 //-------------DaynightCycle Background-------------
 date.innerHTML = days[today] + ", " + hour + ":" + time;
 
+function change_background(hour) {
+  if (hour >= 6 && hour < 12) {
+    document.body.setAttribute("class", "morning");
+  } else if (hour >= 12 && hour < 18) {
+    document.body.setAttribute("class", "noon");
+  } else if (hour >= 18 && hour <= 24) {
+    document.body.setAttribute("class", "evening");
+  } else if (hour >= 0 && hour < 6) {
+    document.body.setAttribute("class", "night");
+  }
+}
+
+change_background(hour);
+
 //-------------Search City-------------
 function search(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=9a3b65ea12488fdd227f03eda47a0bf6&units=metric`;
@@ -62,8 +76,6 @@ search("Jakarta");
 function searchCity(event) {
   event.preventDefault();
   let input = document.querySelector("#city-input");
-  let selectedCity = document.querySelector("#selected-city");
-  selectedCity.innerHTML = input.value;
   search(input.value);
 }
 
@@ -85,7 +97,7 @@ function currentLocation(event) {
 let button = document.querySelector("button");
 button.addEventListener("click", currentLocation);
 
-//Forecast
+//-------------Weather Forcast-------------
 let dayTwo = document.querySelector("#day-two");
 dayTwo.innerHTML = days[(today + 1) % 7];
 let dayThree = document.querySelector("#day-three");
