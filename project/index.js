@@ -1,3 +1,42 @@
+//These should be initialized before the entire weather display so all functions can access them
+let currentCity = null;
+let celciusTemp = null;
+
+//-------------Forecast cards-------------
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastEl = document.querySelector(".right");
+  let forecastHTML = ``;
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0 && index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="card cardDay">
+        <div class="card-body">
+          <img src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png" width="56 px">
+          <h3 id="forecast-day">${
+            days[new Date(forecastDay.dt * 1000).getDay()]
+          }</h3>
+          <h4 id="forecast-max"> ${Math.round(forecastDay.temp.max)}°C </h4>
+          <h4 id="forecast-min"> ${Math.round(forecastDay.temp.min)}°C </h4>
+        </div>
+      </div>`;
+    }
+  });
+
+  forecastEl.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=9a3b65ea12488fdd227f03eda47a0bf6&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 //-------------Daynight Cycle Bg Change-------------
 function changeBackground(hour) {
   if (hour >= 6 && hour < 12) {
@@ -9,20 +48,6 @@ function changeBackground(hour) {
   } else if (hour >= 0 && hour < 6) {
     document.body.setAttribute("class", "night");
   }
-}
-
-//-------------Forecast cards-------------
-function forecast(today, days) {
-  let dayTwo = document.querySelector("#day-two");
-  dayTwo.innerHTML = days[(today + 1) % 7];
-  let dayThree = document.querySelector("#day-three");
-  dayThree.innerHTML = days[(today + 2) % 7];
-  let dayFour = document.querySelector("#day-four");
-  dayFour.innerHTML = days[(today + 3) % 7];
-  let dayFive = document.querySelector("#day-five");
-  dayFive.innerHTML = days[(today + 4) % 7];
-  let daySix = document.querySelector("#day-six");
-  daySix.innerHTML = days[(today + 5) % 7];
 }
 
 //-------------Change Time-------------
@@ -49,80 +74,62 @@ function dateFunc(currentDate) {
     "Saturday",
   ];
 
-  forecast(day, days);
   changeBackground(hours);
 
   return `Last Updated: ${days[day]} ${hours}:${minutes}`;
 }
 
-//-------------Change Weather Data-------------
+//-------------Main Weather Function-------------
 function logWeatherData(response) {
-  //function for displaying weather data
+  //Current city
   let selectedCity = document.querySelector("#selected-city");
-  selectedCity.innerHTML = response.data.name;
+  currentCity = response.data.name;
+  selectedCity.innerHTML = currentCity;
 
+  //Current city's temperature
   let tempEl = document.querySelector("#mainTemp");
   celciusTemp = response.data.main.temp;
   tempEl.innerHTML = Math.round(celciusTemp);
 
+  //Current city's weather
   let descEl = document.querySelector("#description");
   descEl.innerHTML = response.data.weather[0].main;
 
+  //Icon of current city's weather
   let iconEl = document.querySelector("#icon");
   let link = `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
   iconEl.setAttribute("src", link);
-  console.log(link);
   iconEl.setAttribute("alt", response.data.weather[0].main);
 
+  //Current city's humidity
   let humEl = document.querySelector("#hum");
   humEl.innerHTML = `Humidity: ${response.data.main.humidity}`;
 
+  //Current city's wind
   let windEl = document.querySelector("#wind");
   windEl.innerHTML = `Wind: ${response.data.wind.speed}`;
 
+  //Current city's date
   let dateEl = document.querySelector("#date");
   dateEl.innerHTML = dateFunc(response.data.dt);
+
+  //Current city's forecast
+  getForecast(response.data.coord);
 }
-
-//-------------Change Temp Unit-------------
-let celciusTemp = null;
-
-function displayFaren(event) {
-  event.preventDefault();
-  let farenTemp = (celciusTemp * 9) / 5 + 32;
-  let farenEl = document.querySelector("#mainTemp");
-  farenEl.innerHTML = Math.round(farenTemp);
-
-  celLink.classList.remove("selected-temp");
-  farenLink.setAttribute("class", "selected-temp");
-}
-
-let farenLink = document.querySelector("#farenheit");
-farenLink.addEventListener("click", displayFaren);
-
-function displayCelcius(event) {
-  event.preventDefault();
-  let celEl = document.querySelector("#mainTemp");
-  celEl.innerHTML = Math.round(celciusTemp);
-
-  farenLink.classList.remove("selected-temp");
-  celLink.setAttribute("class", "selected-temp");
-}
-
-let celLink = document.querySelector("#celcius");
-celLink.addEventListener("click", displayCelcius);
 
 //-------------Search City-------------
+currentCity = "Jakarta";
 function search(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=9a3b65ea12488fdd227f03eda47a0bf6&units=metric`;
   axios.get(apiUrl).then(logWeatherData);
 }
-search("Jakarta");
+search(currentCity);
 
 function searchCity(event) {
   event.preventDefault();
   let input = document.querySelector("#city-input");
-  search(input.value);
+  currentCity = input.value;
+  search(currentCity);
 }
 
 let cityForm = document.querySelector("#city-form");
